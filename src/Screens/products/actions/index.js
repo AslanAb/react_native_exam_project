@@ -8,7 +8,6 @@ const getProducts = (setProductList, query = {})=>{
       //fetchPolicy: 'network-only',
       onCompleted: async ({getProducts})=>{
         // console.log('PRODUCTS_HOME', getProducts)
-       
         let cartList = await storeCart.get_cart_list()
         setProductList(getProducts.map((item)=>{
           if(cartList?.find((el)=>{

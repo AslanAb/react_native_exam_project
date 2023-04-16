@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { View, Text, Dimensions, StyleSheet, Image, FlatList, ScrollView, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, FlatList } from 'react-native'
 import { ItemCartProduct } from '../../Components'
 import { storeCart } from '../../Services/store'
 
@@ -21,9 +21,20 @@ const Cart = ({ navigation }) => {
     setTotalPrice(count)
   }
 
-  const deleteFn  = () => {
+  const deleteFn = () => {
     updateList()
     updateTotalPrice
+  }
+
+  const [count, setCount] = useState(1)
+  const inc = () => {
+    setCount(prev => prev += 1)
+  }
+  const dec = () => {
+    if (count === 1) {
+      return
+    }
+    setCount(prev => prev -= 1)
   }
 
   useEffect(() => {
@@ -40,16 +51,23 @@ const Cart = ({ navigation }) => {
       data={cartList}
       numColumns={1}
       horizontal={false}
-      renderItem={({ item }) => <ItemCartProduct item={item} navigation={navigation} setTotalPrice={setTotalPrice} deleteFn={deleteFn} />}
-      keyExtractor={item => item._id}
-      ListFooterComponent={<View style={styles.footer}>
-        <Text>Итого:</Text>
-        <Text>{Number(totalPrice).toFixed(1)}</Text>
-      </View>}
+      renderItem={({ item }) => (
+        <ItemCartProduct key={item._id} item={item} setTotalPrice={setTotalPrice} deleteFn={deleteFn} />
+      )}
+      ListFooterComponent={() => {
+        if (cartList?.length > 0) {
+          return (
+            <View style={styles.footer}>
+              <Text>Итого:</Text>
+              <Text>{Number(totalPrice).toFixed(1)}</Text>
+            </View>
+          )
+        }
+      }}
     />
-
   )
 }
+
 const styles = StyleSheet.create({
   footer: {
     flexDirection: 'row',

@@ -1,5 +1,4 @@
 import React from 'react'
-// напиши навигацию react-native-navigation версии 7 
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import
@@ -9,7 +8,6 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { constans } from './Services/utils'
 import ProductDetails from './Screens/productDetails';
 import Cart from './Screens/cart';
-import { Text } from 'react-native'
 import Products from './Screens/products'
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 
@@ -39,12 +37,12 @@ function HomeStack() {
       />
       <Stack.Screen
         name="ProductDetails"
-
+        component={ProductDetails}
         options={({ route }) => ({
           ...defOptions,
           title: route.params?.title
         })}
-        component={ProductDetails} />
+      />
     </Stack.Navigator>
   );
 }
@@ -86,7 +84,6 @@ const Navigation = () => {
               options={{
                 headerShown: false,
                 title: 'Главная',
-
               }}
             />
             <Tab.Screen
@@ -104,7 +101,6 @@ const Navigation = () => {
   );
 };
 
-// Экспортируем навигацию для использования в других компонентах
 export default Navigation;
 
 

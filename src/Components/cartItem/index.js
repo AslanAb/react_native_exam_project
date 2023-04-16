@@ -6,16 +6,8 @@ import { storeCart } from '../../Services/store'
 
 const windowWidth = Dimensions.get('window').width;
 
-export default function ItemCartProduct({ item, navigation, setTotalPrice, deleteFn }) {
-    //   const [catrtStatus, setCatrtStatus] = useState(false)
-    //   const putInCart = async ()=>{
-    //     if(!catrtStatus && !item.inCart){
+export default function ItemCartProduct({ item, setTotalPrice, deleteFn }) {
 
-    //       setCatrtStatus(true)
-    //       await storeCart.set_cart_list(item)
-    //     }
-    //   }
-    // const [product, setProduct] = useState(item)
     const [count, setCount] = useState(1)
     const [price, setPrice] = useState(+item.price)
     const inc = () => {
@@ -37,10 +29,6 @@ export default function ItemCartProduct({ item, navigation, setTotalPrice, delet
         deleteFn()
     }
 
-    // useEffect(() => {
-    //     setTotalPrice(prev => prev = +prev + price)
-    //   }, [])
-
     return (
         <View style={styles.itemContent}>
             <View style={styles.header}>
@@ -52,7 +40,10 @@ export default function ItemCartProduct({ item, navigation, setTotalPrice, delet
                 <Text style={styles.title} numberOfLines={2}>{item.title}</Text>
             </View>
             <Text style={styles.text2}>{item.category.title}</Text>
-            <View style={styles.characteristics}><Text style={styles.text1}>Цвет:</Text><Text style={styles.text2}>{item.color}</Text></View>
+            <View style={styles.characteristics}>
+                <Text style={styles.text1}>Цвет:</Text>
+                <Text style={styles.text2}>{item.color}</Text>
+            </View>
             <View>
                 <View>
                     <TouchableOpacity onPress={inc}>
@@ -65,9 +56,7 @@ export default function ItemCartProduct({ item, navigation, setTotalPrice, delet
                 </View>
                 <Text>{price.toFixed(1)}</Text>
             </View>
-            <TouchableOpacity onPress={dltFn}>
-                <Text>Delete</Text>
-            </TouchableOpacity>
+            <TouchableOpacity onPress={dltFn}><Text>Delete</Text></TouchableOpacity>
         </View>
     )
 }
@@ -108,7 +97,7 @@ const styles = StyleSheet.create({
     },
     characteristics: {
         flexDirection: 'row',
-        alignItems: "end"
+        alignItems: "center"
     },
     text1: {
         fontWeight: 700,

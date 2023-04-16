@@ -77,7 +77,7 @@ const getProducts = gql`
   }
 `;
 const productsGQL = {
-    getProducts,
-    getProduct
+  getProducts,
+  getProduct
 }
 export default productsGQL

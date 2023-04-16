@@ -10,7 +10,6 @@ import {ProductItem} from '../../Components'
 
 const Products = ({navigation})=>{
   const [products, setProducts] = useState([])
-
   useQuery(productsGQL.getProducts, getProducts(setProducts));
   return(
     <FlatList

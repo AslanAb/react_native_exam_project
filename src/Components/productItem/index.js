@@ -1,32 +1,32 @@
-import {useState} from 'react'
-import {View, StyleSheet, TouchableOpacity, Text, Dimensions, Image} from 'react-native'
+import { useState } from 'react'
+import { View, StyleSheet, TouchableOpacity, Text, Dimensions, Image } from 'react-native'
 import config from '../../Config'
 import
- MaterialCommunityIcons
-from 'react-native-vector-icons/MaterialCommunityIcons';
-import {constans, helpers} from '../../Services/utils'
-import {storeCart} from '../../Services/store'
+MaterialCommunityIcons
+  from 'react-native-vector-icons/MaterialCommunityIcons';
+import { constans, helpers } from '../../Services/utils'
+import { storeCart } from '../../Services/store'
 
 const windowWidth = Dimensions.get('window').width;
 
-export default function ItemProduct({item, navigation}){
+export default function ItemProduct({ item, navigation }) {
   const [catrtStatus, setCatrtStatus] = useState(false)
-  const putInCart = async ()=>{
-    if(!catrtStatus && !item.inCart){
+  const putInCart = async () => {
+    if (!catrtStatus && !item.inCart) {
 
       setCatrtStatus(true)
       await storeCart.set_cart_list(item)
     }
   }
 
-  return(
-    <TouchableOpacity  style={styles.item} onPress={()=>navigation.navigate('ProductDetails', {item, title: helpers.limitStr(item.title, 24)})}>
+  return (
+    <TouchableOpacity style={styles.item} onPress={() => navigation.navigate('ProductDetails', { item, title: helpers.limitStr(item.title, 24) })}>
       <View style={styles.itemContent}>
         <View>
-          <Image 
+          <Image
             resizeMode='cover'
             style={styles.productImg}
-            source={{uri: `${config.public}${item.picture}`}} 
+            source={{ uri: `${config.public}${item.picture}` }}
           />
           <Text style={styles.title} numberOfLines={2}>{item.title}</Text>
         </View>
@@ -41,7 +41,7 @@ export default function ItemProduct({item, navigation}){
           </TouchableOpacity>
         </View>
       </View>
-    </TouchableOpacity> 
+    </TouchableOpacity>
   )
 }
 
@@ -50,14 +50,14 @@ const styles = StyleSheet.create({
     backgroundColor: '#f1f1f1',
     padding: 10,
     borderRadius: 10,
-    flex:1,
+    flex: 1,
   },
-  itemContent:{
+  itemContent: {
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'space-between'
   },
-  itemFooter:{
+  itemFooter: {
     marginTop: 5,
     flexDirection: 'row',
     alignItems: 'center',
